@@ -12,9 +12,10 @@ export class TasksController {
   }
 
   @Post()
-  create(@Body() createTaskDto: CreateTaskDto) {
+  async create(@Body() createTaskDto: CreateTaskDto) {
     try {
-      const task = this.tasksService.create(createTaskDto)
+      const task = await this.tasksService.create(createTaskDto)
+      
       return task
     } catch(err) {
       return exceptions.basicError
@@ -22,9 +23,9 @@ export class TasksController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     try{
-      return this.tasksService.findAll();
+      return await this.tasksService.findAll();
     } catch(err) {
       return exceptions.basicError
     }
@@ -32,10 +33,12 @@ export class TasksController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     try{
-      const task = this.tasksService.findOne(+id);
+      const task = await this.tasksService.findOne(+id);
       if(task == null){
+        console.log(exceptions.notFound);
+        
         return exceptions.notFound
         }
       
@@ -47,9 +50,9 @@ export class TasksController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+  async update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
     try{
-      const task = this.tasksService.update(+id, updateTaskDto)
+      const task = await this.tasksService.update(+id, updateTaskDto)
       if(task == null){
         return exceptions.notFound
       }
@@ -62,9 +65,9 @@ export class TasksController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     try{
-      const task = this.tasksService.remove(+id);
+      const task = await this.tasksService.remove(+id);
       if(task == null){
         return exceptions.notFound
       }

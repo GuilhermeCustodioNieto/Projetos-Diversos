@@ -12,22 +12,19 @@ export class TasksService {
     private readonly repository: Repository<Task>
   ) {}
 
-  create(createTaskDto: CreateTaskDto) {
+  async create(createTaskDto: CreateTaskDto) {
     const task = this.repository.create(createTaskDto);
-    this.repository.save(task)
+    await this.repository.save(task)
     return task
   
   }
 
-  findAll() {
-    return this.repository.find()
+  async findAll() {
+    return await this.repository.find()
   }
 
-  findOne(id: number) {
-    const task = this.repository.findOneBy({id})
-    if(task == null){
-      return null
-    }
+  async findOne(id: number) {
+    const task = await this.repository.findOneBy({id})
 
     return task
   }
