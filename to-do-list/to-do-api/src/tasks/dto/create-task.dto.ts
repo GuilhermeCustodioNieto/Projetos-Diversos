@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ActualState } from '../enums/ActualState.enum';
 import { Priority } from '../enums/Priority.enum';
 
@@ -20,5 +20,8 @@ export class CreateTaskDto {
 
     @IsEnum(Priority)
     priority: Priority
+
+    @IsNumber()
+    taskListId: Number;
     
 }

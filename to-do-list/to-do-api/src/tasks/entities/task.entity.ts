@@ -1,6 +1,7 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import { ActualState } from '../enums/ActualState.enum';
 import { Priority } from '../enums/Priority.enum';
+import { TaskList } from 'src/tasks-list/entities/tasks-list.entity';
 
 @Entity('tasks')
 export class Task {
@@ -23,5 +24,7 @@ export class Task {
     @Column({type: 'enum', enum: Priority, default: Priority.NORMAL})
     priority: Priority;
 
+    @ManyToOne(() => TaskList, (taskList) => taskList.tasks, {onDelete: 'CASCADE'})
+    taskList: TaskList
  
 }

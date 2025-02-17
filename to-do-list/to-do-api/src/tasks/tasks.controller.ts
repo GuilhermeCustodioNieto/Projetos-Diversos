@@ -1,10 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import exceptions from 'src/utils/ControllerExceptions';
-
-
 
 @Controller('tasks')
 export class TasksController {
@@ -18,7 +16,7 @@ export class TasksController {
       
       return task
     } catch(err) {
-      return exceptions.basicError
+      throw new InternalServerErrorException(exceptions.internalServerError)
     }
   }
 
@@ -27,7 +25,7 @@ export class TasksController {
     try{
       return await this.tasksService.findAll();
     } catch(err) {
-      return exceptions.basicError
+      throw new InternalServerErrorException(exceptions.internalServerError)
     }
     
   }
@@ -37,15 +35,13 @@ export class TasksController {
     try{
       const task = await this.tasksService.findOne(+id);
       if(task == null){
-        console.log(exceptions.notFound);
-        
-        return exceptions.notFound
+        throw new NotFoundException(exceptions.notFoundError)
         }
       
 
       return task
     } catch(err) {
-      return exceptions.basicError
+      throw new InternalServerErrorException(exceptions.internalServerError)
     }
   }
 
@@ -54,13 +50,13 @@ export class TasksController {
     try{
       const task = await this.tasksService.update(+id, updateTaskDto)
       if(task == null){
-        return exceptions.notFound
+        throw new NotFoundException(exceptions.notFoundError)
       }
 
       return task
 
     } catch(err){
-      return exceptions.basicError
+      throw new InternalServerErrorException(exceptions.internalServerError)
     }
   }
 
@@ -69,10 +65,11 @@ export class TasksController {
     try{
       const task = await this.tasksService.remove(+id);
       if(task == null){
-        return exceptions.notFound
+        throw new NotFoundException(exceptions.notFoundError)
       }
       return task
       } catch{
+        throw new InternalServerErrorException(exceptions.internalServerError)
       }
     
   }
