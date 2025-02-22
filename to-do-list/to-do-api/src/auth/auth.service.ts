@@ -1,22 +1,41 @@
+import { Repository } from 'typeorm';
+import { RegisterUserDto } from './dto/register-auth.dto';
 import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import * as bcrypt from 'bcryptjs'
+import { User } from 'src/users/entities/user.entity';
+import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
-  }
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+    private JwtService: JwtService
+  ) { }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+  async register(registerUserDto: RegisterUserDto): Promise<{ token: string }> {
+    const { email, username, password, secondPassword } = registerUserDto
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+    if (password !== secondPassword) {
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
+
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const userObj = {
+      email: email,
+      username: username,
+      password: hashedPassword
+    }
+
+    const user = await this.userRepository.create(userObj);
+
+    await this.userRepository.save(user)
+
+
+    const payload = await this.JwtService.sign({ userId: user.id, username: user.username })
+    return { token: payload }
   }
 }

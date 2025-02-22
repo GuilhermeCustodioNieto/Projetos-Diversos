@@ -9,8 +9,11 @@ export class User {
     email: string;
 
     @Column()
+    username: string;
+
+    @Column()
     password: string;
 
-    @OneToOne(() => TaskList, (taskList) => taskList.user, {cascade: true})
+    @OneToOne(() => TaskList, (taskList) => taskList.user, { cascade: true })
     taskList: TaskList;
 }
