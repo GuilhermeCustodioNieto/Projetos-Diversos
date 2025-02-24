@@ -10,7 +10,9 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -22,12 +24,11 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       logging: false,
       migrations: [__dirname + '/database/migrations/*{.ts,.js}'],
-      
     }),
     TasksModule,
     TasksListModule,
     UsersModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

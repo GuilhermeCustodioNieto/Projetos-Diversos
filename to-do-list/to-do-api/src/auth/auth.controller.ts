@@ -12,7 +12,10 @@ export class AuthController {
     try {
       return this.authService.register(registerUserDto);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException(exceptions.internalServerError)
+
+
     }
   }
 

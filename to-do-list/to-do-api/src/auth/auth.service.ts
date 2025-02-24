@@ -35,7 +35,8 @@ export class AuthService {
     await this.userRepository.save(user)
 
 
-    const payload = await this.JwtService.sign({ userId: user.id, username: user.username })
+    const payload = await this.JwtService.signAsync({ userId: user.id, username: user.username })
+
     return { token: payload }
   }
 }
