@@ -7,31 +7,35 @@ import { User } from './entities/user.entity';
 @Controller('users')
 export class UsersController {
   constructor(
-    @InjectRepository(User)
-    private readonly usersService: UsersService) {}
+
+    private readonly usersService: UsersService) { }
 
   @Get()
-  findAll() {
-    try{
-      return this.usersService.findAll();
-    } catch(err) {
+  async findAll() {
+    try {
+      return await this.usersService.findAll();
+
+    } catch (err) {
       throw new InternalServerErrorException(exceptions.internalServerError)
     }
-    
+
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    try{
-      const user = this.usersService.findOne(+id);
-      if(user == null) {
+  async findOne(@Param('id') id: string) {
+    try {
+      const idNumber = Number(id)
+
+      const user = await this.usersService.findOne(idNumber);
+      if (user == null) {
         return new NotFoundException(exceptions.notFoundError)
       }
 
       return user;
-    } catch(err) {
+    } catch (err) {
+
       throw new InternalServerErrorException(exceptions.internalServerError)
     }
-    
+
   }
 }

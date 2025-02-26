@@ -1,4 +1,4 @@
-import { LoginUserDto } from './dto/update-auth.dto';
+import { LoginUserDto } from './dto/login-auth.dto';
 import { Repository } from 'typeorm';
 import { RegisterUserDto } from './dto/register-auth.dto';
 import { BadRequestException, Injectable } from '@nestjs/common';
@@ -6,7 +6,6 @@ import * as bcrypt from 'bcryptjs'
 import { User } from 'src/users/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +20,8 @@ export class AuthService {
     if (password !== secondPassword) {
       throw new BadRequestException(`The passwords does not match`)
 
+    } else if (this.userRepository.findOneBy({ email }) !== null) {
+      throw new BadRequestException(`Already exists an user with this email`)
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

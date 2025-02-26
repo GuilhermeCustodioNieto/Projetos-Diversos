@@ -1,5 +1,6 @@
 import { TaskList } from 'src/tasks-list/entities/tasks-list.entity';
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()

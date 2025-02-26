@@ -9,19 +9,21 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>
-  ){}
+  ) { }
 
-  findAll() {
-    return this.userRepository.find();
+  async findAll() {
+    const users = await this.userRepository.find({});
+
+    return users
   }
 
   async findOne(id: number) {
-    return await this.userRepository.findOneBy({id})
+    return await this.userRepository.findOneBy({ id: id })
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto){
-    const user = await this.userRepository.findOneBy({id})
-    if(user !== null) {
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOneBy({ id })
+    if (user !== null) {
       this.userRepository.merge(user, updateUserDto);
       this.userRepository.save(user)
     }
