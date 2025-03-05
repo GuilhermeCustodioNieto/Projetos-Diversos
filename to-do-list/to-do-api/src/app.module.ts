@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,6 +7,10 @@ import { TasksModule } from './tasks/tasks.module';
 import { TasksListModule } from './tasks-list/tasks-list.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { AuthMiddleware } from './middleware/AuthMiddleware.middleware';
+import { UsersController } from './users/users.controller';
+import { TasksController } from './tasks/tasks.controller';
+import { TasksListController } from './tasks-list/tasks-list.controller';
 
 @Module({
   imports: [
@@ -33,4 +37,9 @@ import { AuthModule } from './auth/auth.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware).forRoutes(UsersController, TasksController, TasksListController)
+  }
+}

@@ -1,6 +1,6 @@
 import { Controller, Get, Param, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { UsersService } from './users.service';
-import exceptions from 'src/utils/ControllerExceptions';
+import exceptions from 'src/utils/ControllerExceptions.exceptions';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 

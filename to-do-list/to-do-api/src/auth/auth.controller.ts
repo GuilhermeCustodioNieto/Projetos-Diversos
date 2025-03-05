@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, InternalServerErrorException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import RegisterUserDto from './dto/register-auth.dto';
-import exceptions from 'src/utils/ControllerExceptions';
+import exceptions from 'src/utils/ControllerExceptions.exceptions';
 import { LoginUserDto } from './dto/login-auth.dto';
 
 @Controller('auth')

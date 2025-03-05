@@ -1,7 +1,7 @@
 import { LoginUserDto } from './dto/login-auth.dto';
 import { Repository } from 'typeorm';
 import { RegisterUserDto } from './dto/register-auth.dto';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs'
 import { User } from 'src/users/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
@@ -18,10 +18,10 @@ export class AuthService {
     const { email, username, password, secondPassword } = registerUserDto
 
     if (password !== secondPassword) {
-      throw new BadRequestException(`The passwords does not match`)
+      throw new UnauthorizedException(`The passwords do not match`)
 
-    } else if (this.userRepository.findOneBy({ email }) !== null) {
-      throw new BadRequestException(`Already exists an user with this email`)
+    } else if (await this.userRepository.findOneBy({ email }) !== null) {
+      throw new UnauthorizedException(`A user with this email already exists`)
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -47,12 +47,12 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({ email })
 
     if (user == null) {
-      throw new BadRequestException(`The user does not exists`)
+      throw new UnauthorizedException(`The user does not exists`)
     }
 
     const passwordEqual = await bcrypt.compare(password, user.password)
     if (!passwordEqual) {
-      throw new BadRequestException('The password does not match')
+      throw new UnauthorizedException('The password does not match')
     }
 
     const payload = await this.JwtService.signAsync({ id: user.id, username: user.username })

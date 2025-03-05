@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, InternalServerErrorException } from '@nestjs/common';
 import { TasksListService } from './tasks-list.service';
-import exceptions from 'src/utils/ControllerExceptions';
+import exceptions from 'src/utils/ControllerExceptions.exceptions';
 
 @Controller('tasks-list')
 export class TasksListController {
