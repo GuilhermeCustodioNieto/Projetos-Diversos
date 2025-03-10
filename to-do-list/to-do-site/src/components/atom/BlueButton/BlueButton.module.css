@@ -1,4 +1,9 @@
 .blue_button {
     width: 148;
     height: 55;
+    background-color: #008BE1;
+    color: #fff;
+    border-radius: 10%;
+    border-style: none;
 }
+

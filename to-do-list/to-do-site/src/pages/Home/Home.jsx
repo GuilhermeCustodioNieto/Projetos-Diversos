@@ -1,9 +1,10 @@
 import React from "react";
+import NavBar from "../../components/organism/NavBar/NavBar";
 
 function Home() {
   return (
     <div>
-      <p>Hello, world</p>
+      <NavBar></NavBar>
     </div>
   );
 }
