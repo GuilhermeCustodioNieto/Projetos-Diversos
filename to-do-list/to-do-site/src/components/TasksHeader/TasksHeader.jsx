@@ -7,8 +7,8 @@ function TasksHeader() {
     <section className={styles.tasksHeaderContainer}>
       <BlueButton
         text="Adicionar tarefa"
-        width="250"
-        height="55"
+        width="13.25"
+        height="7.5"
         onClick={() => {}}
       ></BlueButton>
 
