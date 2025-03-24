@@ -17,7 +17,7 @@ function Home() {
             Com a nossa lista de tarefas, tudo fica muito mais fácil! Economize
             horas de planejamento e simplifique sua vida!
           </p>
-          <BlueButton text="Começar agora" width="145" height="55"></BlueButton>
+          <BlueButton text="Começar agora" width="9.555" height="7.5"></BlueButton>
         </DivTexts>
 
         <DivImgs>
@@ -37,7 +37,9 @@ function Home() {
   );
 }
 
-const IconImg = styled.img``;
+const IconImg = styled.img`
+
+  `;
 
 const Container = styled.main`
   display: flex;
@@ -64,6 +66,8 @@ const DivImgs = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0px 50px;
+  width: 22.656vw;
+  height: 49.8vh;
 `;
 
 export default Home;

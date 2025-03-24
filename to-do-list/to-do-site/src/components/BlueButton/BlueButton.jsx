@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 function BlueButton({ text, width, height, onClick }) {
   const Button = styled.button`
-    width: ${width}px;
-    height: ${height}px;
+    width: ${width}vw;
+    height: ${height}vh;
     background-color: #008be1;
     color: #fff;
     border-radius: 10px;

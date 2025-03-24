@@ -21,8 +21,8 @@ function NavBar() {
       <div className={styles.buttons}>
         <BlueButton
           text="Registrar"
-          width="120"
-          height="50"
+          width="7.25"
+          height="6.5"
           onClick={registerRedirection}
         ></BlueButton>
 
