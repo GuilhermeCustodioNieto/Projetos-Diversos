@@ -1,0 +1,14 @@
+.settings_link {
+    background-color: #760e0e9d;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    
+}
+
+.settings_link img {
+    width: 70px;
+    height: 70px;
+}

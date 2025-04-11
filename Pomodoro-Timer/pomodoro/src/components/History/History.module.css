@@ -1,0 +1,28 @@
+.history {
+    background-color: #760e0e9d;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px;
+    color: #fff;
+    height: 400px;
+    width: 280px;
+    align-self: center;
+    margin: 100px 0px 0px 0px;
+    border-radius: 15px;
+    
+
+}
+
+.history h3 {
+    margin: 10px 0px 0px 0px;
+    font-size: 30px;
+}
+
+.history div{
+    display: flex;
+    width: 70%;
+    font-size: 25px;
+
+}

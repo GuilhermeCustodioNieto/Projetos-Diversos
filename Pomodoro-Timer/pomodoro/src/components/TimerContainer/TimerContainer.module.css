@@ -1,0 +1,39 @@
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 100px;
+    background-color: #760e0e9d;
+    border-radius: 10px;
+    width: 450px;
+}
+
+.timer h2 {
+    font-size: 120px;
+    color: #fff;
+    margin: 0px;
+}
+
+.total_hour {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #760e0e9d;
+    border-radius: 0px 0px 10px 10px;
+    width: 250px;
+}
+
+.total_hour h3 {
+    font-size: 40px;
+    color: #fff;
+    margin: 0px;
+}
+
+.timer_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
