@@ -16,7 +16,7 @@ function Timer() {
   // 4. função de resetar o cronometro
   // 5. função de pausar o cronometro
 
-  const [timerValue, setTimerValue] = useState(1);
+  const [timerValue, setTimerValue] = useState(1500);
   const [isRunning, setIsRunning] = useState(false);
   const [isRed, setIsRed] = useState(true);
   const [Page, setPage] = useState(styled.div``);
