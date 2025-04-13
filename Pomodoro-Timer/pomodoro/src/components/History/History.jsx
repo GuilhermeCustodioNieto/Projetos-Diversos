@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import styles from "./History.module.css";
 import styled from "styled-components";
 
-function History({ isRed }) {
-  const [History, setHistory] = useState(styled.div``);
+function History({ isRed, historyData }) {
+  const [StyledHistoryContainer, setStyledHistoryContainer] = useState(
+    styled.div``
+  );
 
   useEffect(() => {
     if (isRed) {
-      setHistory(styled.div`
+      setStyledHistoryContainer(styled.div`
         background-color: #760e0e9d;
         display: flex;
         flex-direction: column;
@@ -22,7 +24,7 @@ function History({ isRed }) {
         border-radius: 15px;
       `);
     } else {
-      setHistory(styled.div`
+      setStyledHistoryContainer(styled.div`
         background-color: #0066af;
         display: flex;
         flex-direction: column;
@@ -40,12 +42,14 @@ function History({ isRed }) {
   }, [isRed]);
 
   return (
-    <History>
+    <StyledHistoryContainer>
       <h3 className={styles.history_title}>Histórico</h3>
       <div className={styles.history_div}>
-        <p>00:00</p>
+        {historyData.map((data, index) => {
+          return <p key={index}>{data}</p>;
+        })}
       </div>
-    </History>
+    </StyledHistoryContainer>
   );
 }
 

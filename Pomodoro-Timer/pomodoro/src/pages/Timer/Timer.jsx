@@ -18,14 +18,17 @@ function Timer() {
   const [isRunning, setIsRunning] = useState(false);
   const [isRed, setIsRed] = useState(true);
   const [Page, setPage] = useState(styled.div``);
+  const [historyData, setHistoryData] = useState([]);
 
   function onFinish() {
     setIsRunning(false);
     if (isRed) {
       setIsRed(false);
+      setHistoryData((prev) => [...prev, "25:00"]);
       setTimerValue(300);
     } else {
       setIsRed(true);
+      setHistoryData((prev) => [...prev, "05:00"]);
       setTimerValue(1500);
     }
   }
@@ -81,7 +84,7 @@ function Timer() {
         ></StartBtn>
       </div>
 
-      <History isRed={isRed}></History>
+      <History isRed={isRed} historyData={historyData}></History>
     </Page>
   );
 }

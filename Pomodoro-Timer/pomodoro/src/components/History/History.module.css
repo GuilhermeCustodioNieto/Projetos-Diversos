@@ -22,7 +22,13 @@
 
 .history_div{
     display: flex;
+    flex-direction: column;
+    
     width: 70%;
     font-size: 25px;
 
+}
+
+.history_div p{
+    margin: 10px 0px;
 }

@@ -18,8 +18,6 @@ function TimerContainer({ seconds, isRunning, onFinish, isRed }) {
   const [TotalHour, setTotalHour] = useState(styled.div``);
   const timerId = useRef();
 
-  console.log(isRed);
-
   useEffect(() => {
     setCountDown(seconds);
   }, [seconds]);
