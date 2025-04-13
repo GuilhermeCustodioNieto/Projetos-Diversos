@@ -15,12 +15,12 @@
 
 }
 
-.history h3 {
+.history_title {
     margin: 10px 0px 0px 0px;
     font-size: 30px;
 }
 
-.history div{
+.history_div{
     display: flex;
     width: 70%;
     font-size: 25px;

@@ -1,10 +1,11 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import styles from "./Timer.module.css";
 import Title from "../../components/Title/Title";
 import SettingsLink from "../../components/SettingsLink/SettingsLink";
 import TimerContainer from "../../components/TimerContainer/TimerContainer";
 import History from "../../components/History/History";
 import StartBtn from "../../components/StartBtn/StartBtn";
+import styled from "styled-components";
 
 function Timer() {
   // 1. o tempo limite de minutos e segundos
@@ -13,33 +14,75 @@ function Timer() {
   // 4. função de resetar o cronometro
   // 5. função de pausar o cronometro
 
-  const [timerValue, setTimerValue] = useState(0);
-  const [isRunning, setIsRunning] = useState(true);
+  const [timerValue, setTimerValue] = useState(1500);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isRed, setIsRed] = useState(true);
+  const [Page, setPage] = useState(styled.div``);
+
+  function onFinish() {
+    setIsRunning(false);
+    if (isRed) {
+      setIsRed(false);
+      setTimerValue(300);
+    } else {
+      setIsRed(true);
+      setTimerValue(1500);
+    }
+  }
 
   function start() {
     if (isRunning) {
       setIsRunning(false);
     } else {
       setIsRunning(true);
-      setTimerValue(1500);
     }
   }
 
+  useEffect(() => {
+    if (isRed) {
+      setPage(styled.div`
+        background-color: #cc2041;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      `);
+    } else {
+      setPage(styled.div`
+        background-color: #2084cc;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      `);
+    }
+  }, [isRed]);
+
   return (
-    <div className={styles.page}>
+    <Page>
       <h1></h1>
-      <SettingsLink></SettingsLink>
+      <SettingsLink isRed={isRed}></SettingsLink>
       <div className={styles.main_infos}>
         <Title></Title>
         <TimerContainer
           seconds={timerValue}
           isRunning={isRunning}
+          onFinish={onFinish}
+          isRed={isRed}
         ></TimerContainer>
-        <StartBtn startFunction={start}></StartBtn>
+        <StartBtn
+          startFunction={start}
+          isRunning={isRunning}
+          isRed={isRed}
+        ></StartBtn>
       </div>
 
-      <History></History>
-    </div>
+      <History isRed={isRed}></History>
+    </Page>
   );
 }
 

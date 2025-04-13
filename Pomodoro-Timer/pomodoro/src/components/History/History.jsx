@@ -1,14 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./History.module.css";
+import styled from "styled-components";
 
-function History() {
+function History({ isRed }) {
+  const [History, setHistory] = useState(styled.div``);
+
+  useEffect(() => {
+    if (isRed) {
+      setHistory(styled.div`
+        background-color: #760e0e9d;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2px;
+        color: #fff;
+        height: 400px;
+        width: 280px;
+        align-self: center;
+        margin: 100px 0px 0px 0px;
+        border-radius: 15px;
+      `);
+    } else {
+      setHistory(styled.div`
+        background-color: #0066af;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2px;
+        color: #fff;
+        height: 400px;
+        width: 280px;
+        align-self: center;
+        margin: 100px 0px 0px 0px;
+        border-radius: 15px;
+      `);
+    }
+  }, [isRed]);
+
   return (
-    <div className={styles.history}>
-      <h3>Histórico</h3>
-      <div>
+    <History>
+      <h3 className={styles.history_title}>Histórico</h3>
+      <div className={styles.history_div}>
         <p>00:00</p>
       </div>
-    </div>
+    </History>
   );
 }
 

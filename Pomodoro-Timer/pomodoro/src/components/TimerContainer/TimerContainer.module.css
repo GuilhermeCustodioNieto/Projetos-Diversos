@@ -8,7 +8,7 @@
     width: 450px;
 }
 
-.timer h2 {
+h2 {
     font-size: 120px;
     color: #fff;
     margin: 0px;
@@ -24,7 +24,7 @@
     width: 250px;
 }
 
-.total_hour h3 {
+h3 {
     font-size: 40px;
     color: #fff;
     margin: 0px;
