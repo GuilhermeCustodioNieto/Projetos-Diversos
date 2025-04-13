@@ -1,0 +1,20 @@
+.button_link {
+    
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.button_link_img {
+    width:   70px;
+    height: 70px;
+    margin: 10px;
+    background-color: #760e0e9d;
+    padding: 10px;
+    border-radius: 10px;
+}

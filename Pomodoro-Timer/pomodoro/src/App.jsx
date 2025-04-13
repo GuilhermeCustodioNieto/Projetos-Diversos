@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Timer from "./pages/Timer/Timer";
+
 function App() {
   return (
     <>

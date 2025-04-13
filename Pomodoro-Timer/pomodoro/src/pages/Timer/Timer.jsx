@@ -1,11 +1,13 @@
 import { React, useEffect, useState } from "react";
 import styles from "./Timer.module.css";
 import Title from "../../components/Title/Title";
-import SettingsLink from "../../components/SettingsLink/SettingsLink";
+
 import TimerContainer from "../../components/TimerContainer/TimerContainer";
 import History from "../../components/History/History";
 import StartBtn from "../../components/StartBtn/StartBtn";
 import styled from "styled-components";
+
+import ButtonLink from "../../components/ButtonLink/ButtonLink";
 
 function Timer() {
   // 1. o tempo limite de minutos e segundos
@@ -14,7 +16,7 @@ function Timer() {
   // 4. função de resetar o cronometro
   // 5. função de pausar o cronometro
 
-  const [timerValue, setTimerValue] = useState(1500);
+  const [timerValue, setTimerValue] = useState(1);
   const [isRunning, setIsRunning] = useState(false);
   const [isRed, setIsRed] = useState(true);
   const [Page, setPage] = useState(styled.div``);
@@ -67,8 +69,7 @@ function Timer() {
 
   return (
     <Page>
-      <h1></h1>
-      <SettingsLink isRed={isRed}></SettingsLink>
+      <ButtonLink isRed={isRed}></ButtonLink>
       <div className={styles.main_infos}>
         <Title></Title>
         <TimerContainer
