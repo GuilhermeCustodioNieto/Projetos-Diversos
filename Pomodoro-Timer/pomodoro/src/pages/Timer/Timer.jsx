@@ -31,8 +31,11 @@ function Timer() {
       <SettingsLink></SettingsLink>
       <div className={styles.main_infos}>
         <Title></Title>
-        <TimerContainer seconds={timerValue}></TimerContainer>
-        <StartBtn startFunction={start} isRunning={isRunning}></StartBtn>
+        <TimerContainer
+          seconds={timerValue}
+          isRunning={isRunning}
+        ></TimerContainer>
+        <StartBtn startFunction={start}></StartBtn>
       </div>
 
       <History></History>
