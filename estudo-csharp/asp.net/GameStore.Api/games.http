@@ -1,0 +1,23 @@
+GET http://localhost:5026/games
+
+###
+POST http://localhost:5026/games
+Content-Type: application/json
+
+{
+    "name": "Game",
+    "genre": "Adventure",
+    "price": 59.99,
+    "releaseDate": "2024-07-01"
+}
+
+###
+PUT http://localhost:5026/games/4
+Content-Type: application/json
+
+{
+    "name": "Updated Game",
+    "genre": "Action",
+    "price": 49.99,
+    "releaseDate": "2024-08-01"
+}

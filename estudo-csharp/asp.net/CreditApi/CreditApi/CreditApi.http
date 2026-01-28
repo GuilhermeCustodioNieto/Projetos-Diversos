@@ -1,0 +1,6 @@
+@CreditApi_HostAddress = http://localhost:5057
+
+GET {{CreditApi_HostAddress}}/
+Accept: application/json
+
+###
