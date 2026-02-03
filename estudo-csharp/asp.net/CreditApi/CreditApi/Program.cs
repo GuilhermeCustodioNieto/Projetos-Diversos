@@ -1,4 +1,4 @@
-using CreditApi.Data;
+using CreditApi.Infraestructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CreditApi.Models
+namespace CreditApi.Domain.Entities
 {
     public class User
     {

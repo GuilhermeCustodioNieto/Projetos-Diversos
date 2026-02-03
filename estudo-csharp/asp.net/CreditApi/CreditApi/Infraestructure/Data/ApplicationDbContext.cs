@@ -1,7 +1,7 @@
-﻿using CreditApi.Models;
+﻿using CreditApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CreditApi.Data
+namespace CreditApi.Infraestructure.Data
 {
     public class ApplicationDbContext : DbContext
     {
