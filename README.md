@@ -1,8 +1,17 @@
 # Projetos-Diversos
- Um repositório com diversos projetos aleatórios para praticar
-
-
-- Projeto 1: https://www.figma.com/proto/XxLvPBct1zTWg48PIHwKdm/To-Do-List?node-id=1-3&p=f&t=AThxmVuig2GkxfNo-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1
-
-## Coisas para arrumar:
-- A requisição não retorna a mensagem de erro como deveria.
+ Um repositório com diversos projetos profissionais para praticar minhas habilidades em programação. 
+ 
+ Esse repositório inclui diversas tecnologias:
+ - Java
+ - Spring Boot
+ - JPA
+ - C#
+ - ASP.NET Core
+ - Entity Framework
+ - NestJS
+ - ReactJS
+ - NodeJS
+ - HTML
+ - CSS
+ - JavaScript
+ - TypeScrupt
