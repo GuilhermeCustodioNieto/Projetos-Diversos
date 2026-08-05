@@ -1,98 +1,162 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Bookstore (Microservices)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Sistema de livraria implementado sob a arquitetura de microserviços, demonstrando a separação de responsabilidades e a escalabilidade de serviços independentes.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 📖 Sobre o Projeto
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+O Bookstore é um projeto experimental de engenharia de software focado na implementação de microserviços utilizando o framework NestJS. O objetivo principal é demonstrar como decompor um sistema monolítico de e-commerce em serviços menores e independentes, onde cada serviço é responsável por um domínio específico do negócio.
 
-## Project setup
+A arquitetura implementa o padrão **API Gateway**, onde todas as requisições do cliente são recebidas por um único ponto de entrada que as distribui para os serviços internos, ocultando a complexidade da rede interna e simplificando a interface para o frontend.
 
-```bash
-$ npm install
+O público-alvo são desenvolvedores interessados em arquiteturas distribuídas, microserviços e orquestração de APIs.
+
+---
+
+## ✨ Funcionalidades
+
+- **API Gateway Centralizado**: Ponto único de entrada que roteia as requisições para os serviços de livros e usuários.
+- **Serviço de Livros (Books Service)**: Gestão completa do catálogo de livros, incluindo operações de busca, listagem e detalhes.
+- **Serviço de Usuários (Users Service)**: Controle de perfis, autenticação e gestão de dados dos clientes.
+- **Comunicação Inter-serviços**: Implementação de troca de mensagens eficiente entre o Gateway e os microserviços.
+- **Isolamento de Domínios**: Cada serviço possui sua própria lógica e dependências, permitindo atualizações independentes sem afetar o sistema global.
+- **Escalabilidade Horizontal**: Estrutura preparada para que cada serviço possa ser escalado individualmente conforme a demanda.
+
+---
+
+## 🏗 Arquitetura
+
+A aplicação utiliza o padrão de **Microserviços com API Gateway**, utilizando o módulo de microserviços do NestJS para a comunicação interna.
+
+```mermaid
+flowchart LR
+    User((Usuário)) -->|HTTP/REST| Gateway[Bookstore API Gateway]
+    
+    subgraph "Ecossistema de Microserviços"
+        Gateway -->|Internal Request| BooksSvc[Books Service]
+        Gateway -->|Internal Request| UsersSvc[Users Service]
+    end
+    
+    subgraph "Domínios de Dados"
+        BooksSvc --> BooksDB[(Books DB)]
+        UsersSvc --> UsersDB[(Users DB)]
+    end
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+## 📂 Estrutura do Projeto
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```text
+.
+├── apps
+│   ├── bookstore-api-gateway  # Gateway de entrada e roteamento de requisições
+│   ├── books                  # Microserviço de gestão de livros
+│   └── users                  # Microserviço de gestão de usuários
+├── node_modules               # Dependências do projeto
+├── package.json               # Configurações globais e scripts de build
+├── tsconfig.json              # Configurações de compilação do TypeScript
+└── nest-cli.json              # Configurações do CLI do NestJS
 ```
 
-## Run tests
+---
+
+## 🛠 Tecnologias Utilizadas
+
+| Tecnologia | Finalidade |
+|------------|------------|
+| NestJS | Framework para construção de aplicações Node.js eficientes |
+| @nestjs/microservices | Módulo para implementação de comunicação entre serviços |
+| TypeScript | Tipagem estática para garantir a consistência dos contratos de API |
+| RxJS | Programação reativa para manipulação de fluxos de dados assíncronos |
+| Vite/Nest CLI | Ferramentas de build e automação de desenvolvimento |
+
+---
+
+## 📦 Dependências Principais
+
+- **@nestjs/core**: Núcleo do framework para injeção de dependências e modularização.
+- **@nestjs/microservices**: Provê as abstrações necessárias para a comunicação entre o Gateway e os serviços.
+- **reflect-metadata**: Habilita as decorators do NestJS para configuração de classes e métodos.
+
+---
+
+## ⚙ Fluxo da Aplicação
+
+Usuário $\rightarrow$ Requisição HTTP $\rightarrow$ API Gateway $\rightarrow$ Validação de Rota $\rightarrow$ Encaminhamento para Microserviço $\rightarrow$ Processamento da Regra de Negócio $\rightarrow$ Retorno ao Gateway $\rightarrow$ Resposta ao Usuário.
+
+---
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+
+- Node.js instalado
+- npm ou yarn
+
+---
+
+### Clonando o projeto
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone <url-do-repositorio>
+cd Projetos-Diversos/bookstore
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Instalando dependências
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+### Executando os Serviços
 
-Check out a few resources that may come in handy when working with NestJS:
+Como se trata de microserviços, é necessário iniciar cada aplicação:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+# Iniciar o Gateway
+npm run start # (ajustar conforme o script de build/start do nest)
 
-## Support
+# Iniciar o serviço de Livros
+# (Utilizar o comando de start específico para a app /apps/books)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Iniciar o serviço de Usuários
+# (Utilizar o comando de start específico para a app /apps/users)
+```
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 🔍 Decisões Arquiteturais
 
-## License
+- **Utilização de API Gateway**: A decisão de implementar um Gateway evita que o frontend precise conhecer a URL de cada microserviço, simplificando a manutenção e permitindo a implementação de autenticação centralizada.
+- **Monorepo com NestJS**: A escolha de manter todos os microserviços em um único repositório (`apps/`) facilita o compartilhamento de tipos e a consistência de versões entre os serviços.
+- **Sincronia de Contratos**: O uso de TypeScript em todos os serviços garante que as mensagens trocadas entre o Gateway e os Microserviços sigam contratos rígidos, evitando erros de runtime.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+## 💡 Boas Práticas Utilizadas
+
+- **Separação de Domínios**: Cada microserviço lida exclusivamente com sua própria entidade, evitando a criação de um "monólito distribuído".
+- **Sincronização de DTOs**: Uso de Data Transfer Objects para definir a estrutura de dados trafegadas entre os serviços.
+- **Roteamento Declarativo**: Uso de decorators do NestJS para definir endpoints de forma clara e organizada.
+
+---
+
+## 📚 Aprendizados
+
+Ao analisar este projeto, é possível aprender sobre:
+- A implementação de padrões de arquitetura de microserviços.
+- O papel e a importância de um API Gateway em sistemas distribuídos.
+- A comunicação assíncrona e síncrona entre serviços utilizando NestJS.
+- A gestão de dependências em projetos monorepo.
+
+---
+
+## 👨‍💻 Autor
+
+[Guilherme](https://github.com/guilherme-dev)
